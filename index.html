@@ -1,0 +1,548 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card</title>
+  <link rel="shortcut icon" type="img/png" href="img/turn.png">
+  <link rel="Stylesheet" href="styles.css">
+  <style>
+    * {
+      margin-block-start: 0;
+      margin-block-end: 0;
+    }
+
+    .seperator {
+      height: 1px;
+      background-color: black;
+      width: 100%;
+    }
+
+    body {
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      flex-wrap: wrap;
+      background-color: antiquewhite;
+      gap: 50px;
+    }
+
+    #part1 {
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    #part2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #part2_btnlnk {
+      display: flex;
+      flex-direction: row;
+      gap: 48px;
+    }
+
+    #part3 {
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #part3 img {
+      width: 200px;
+    }
+
+    #button {
+      color: aqua;
+    }
+
+    #s {
+      width: 30px;
+      filter: drop-shadow(0px 0px 10px black)
+    }
+
+    table {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 500px;
+    }
+
+    table td,
+    table th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #d88b8b;
+    }
+
+    table tr:hover {
+      background-color: #7e7373;
+    }
+
+    table th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: rgb(242, 38, 208);
+    }
+
+    #part5 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #part5_1 {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    #part5_btn {
+      height: 50px;
+      width: 100px;
+    }
+
+    .doors {
+      width: 150px;
+      height: 150px;
+      background-color: yellowgreen;
+      margin: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 48px;
+    }
+
+    li {
+      font-size: 48px;
+    }
+
+    #test-container {
+      height: 200px;
+      width: 200px;
+      background-color: aliceblue;
+    }
+
+    .animate {
+      animation: 2s fadeIn ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        background-color: red;
+      }
+
+      to {
+        background-color: blue;
+      }
+    }
+  </style>
+</head>
+
+<body id="body" onload="render()">
+  <section id="sortierung">
+    <style>
+      #card {
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+        padding-top: 30px;
+
+      }
+
+      .cats {
+        width: 350px;
+        padding: 16px;
+        border-radius: 16px;
+        margin: 8px;
+        display: flex;
+        flex-direction: column;
+        background-color: whitesmoke;
+      }
+
+
+      .newCardTemp {
+        width: 350px;
+        padding: 15px;
+        border-radius: 16px;
+        margin: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: whitesmoke;
+      }
+
+      .newCardTemp span {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+      }
+
+      .newCardTemp input {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .hide {
+        display: none !important
+      }
+
+      .kommentare {
+        background-color: #d88b8b;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 8px;
+      }
+
+      #btn {
+        margin-bottom: 8px;
+      }
+
+      #c {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #srt {
+        font-size: 16px;
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+      }
+
+      p {
+        background-color: #d88b8b;
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #newCardBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.2) !important;
+        text-align: center;
+      }
+    </style>
+    <div id="card">
+      <script>       
+        let cats = [];
+        let cats2 = [
+          {
+            Name: ['Nala', 'Schleife'],
+            Alter: 2,
+            Rasse: 'Heilige Birma',
+            Kommentare: []
+          },
+          {
+            Name: 'Dalia',
+            Alter: 2,
+            Rasse: 'Nowegische Waldkatze',
+            Kommentare: []
+          },
+          {
+            Name: 'Luna',
+            Alter: 2,
+            Rasse: 'Britisch Kurzhaar',
+            Kommentare: []
+          },
+          {
+            Name: 'Susi',
+            Alter: 19,
+            Rasse: 'Europäisch Kurzhaar',
+            Kommentare: []
+          },
+          {
+            Name: 'Pipi',
+            Alter: 9,
+            Rasse: 'Europäisch Kurzhaar',
+            Kommentare: []
+          },
+          {
+            Name: 'Felix',
+            Alter: 19,
+            Rasse: 'Europäisch Kurzhaar',
+            Kommentare: []
+          }
+        ]
+        load();
+        /*function sortDown() {
+          for (let a = 0; a < cats.length; a++) {
+            cats[a]['Kommentare'].sort(sortByDate).reverse();
+          }
+          render();
+        }
+  
+        function sortUp() {
+          for (let a = 0; a < cats.length; a++) {
+            cats[a]['Kommentare'].sort(sortByDate);
+          }
+          render();
+        }*/
+        function sortDown(i) {
+          let cat = cats[i];
+          cat.Kommentare.sort(sortByDate).reverse();
+          render();
+        }
+        function sortUp(i) {
+          let cat = cats[i];
+          cat.Kommentare.sort(sortByDate);
+          render();
+        }
+        function render() {
+
+          let card = document.getElementById('card');
+          card.innerHTML = '';
+          for (let i = 0; i < cats.length; i++) {
+            let cat = cats[i];
+
+            card.innerHTML += templateCard(i, cat);
+
+            let kommentareContainer = document.getElementById(`cats${i}`);
+
+            for (let j = 0; j < cat['Kommentare'].length; j++) {
+              let kommentareUser = cat['Kommentare'][j];
+
+              kommentareContainer.innerHTML += `
+              <div id="KommentarDaten${j}">
+              <span><b>${kommentareUser['User']}</b> schrieb am
+              </span>
+              <span>${kommentareUser['Datum']} um ${kommentareUser['Zeit']}</span>
+              </div>
+            `;
+
+              let KommentarDaten = document.getElementById(`cats${i}`);
+
+              for (let k = 0; k < kommentareUser['Kommentar'].length; k++) {
+                let kommentar = kommentareUser['Kommentar'][k];
+
+                KommentarDaten.innerHTML += `
+                <span>${kommentar}</span><br>
+              `;
+              }
+            }
+          }
+
+          card.innerHTML += `
+          <div id="newCardTemp" class="newCardTemp hide">
+          <span><b>Name: </b><input id="name">  </span>
+          <span><b>Alter: </b><input id="alter"> </span>
+          <span><b>Rasse: </b><input id="rasse"> </span>
+          <br>
+          
+              <button onclick="pushNewCardInArray()">Hinzufügen</button>
+              <button onclick="render()">Verwerfen</button><br>
+           </div>
+          `;
+          card.innerHTML += `<div class="cats" onclick="newCardTemp()" id="newCardBtn">New Card</div>`;
+        }
+        function templateCard(i, cat){
+          return `
+            <div class="cats" id="cats${i}">
+              <button onclick="deleteCard(${i})">Delete Card</button>
+              <button id="btn" onclick="editCard(${i})">Edit Card</button>
+              <span><b>Name: </b> <i contenteditable="true" id="name${i}">${cat['Name']} </i> </span>
+              <span><b>Alter: </b> <i contenteditable="true" id="alter${i}">${cat['Alter']} </i></span>
+              <span><b>Rasse: </b> <i contenteditable="true" id="rasse${i}">${cat['Rasse']} </i></span>
+                <div class="kommentare" id="kommentare${i}">
+                  <div id="c">
+                    <p onclick="sortDown(${i})">sort down</p>
+                    <h1>Bericht</h1>
+                    <p onclick="sortUp(${i})">sort up</p>
+                  </div>
+                  <input id="input${i}" placeholder="kommentar">
+                  <input id="inputname${i}" placeholder="name">
+                  <button onclick=kommentieren(${i})>send</button>
+                </div>
+            </div>
+          `;
+        };
+        function kommentieren(i) {
+
+          let name = document.getElementById(`inputname${i}`).value;
+          let com = document.getElementById(`input${i}`).value;
+
+          const d = new Date().getDate();
+          const m = new Date().getMonth();
+          const y = new Date().getFullYear();
+          const h = new Date().getHours();
+          const min = new Date().getMinutes();
+          const sec = new Date().getSeconds();
+
+          let a = d + ':' + m + ':' + y;
+          let b = h + ':' + min + ':' + sec;
+
+          console.log(a);
+
+          const objekt = {
+            User: name,
+            Datum: a,
+            Zeit: b,
+            Kommentar: [com]
+          }
+
+          cats[i]['Kommentare'].push(objekt);
+          save();
+          render();
+        }
+        function newCardTemp() {
+
+          document.getElementById('newCardTemp').classList.remove('hide');
+
+
+          /*
+                  card.innerHTML += `
+                  <div id="newCardTemp" class="cats"><br><br>
+                    <span><b>Name: </b><input id="name">  </span>
+                    <span><b>Alter: </b><input id="alter"> </span>
+                    <span><b>Rasse: </b><input id="rasse"> </span><br>
+                    <button onclick="pushNewCardInArray()">Hinzufügen</button><button onclick="render()">Verwerfen</button>
+                    <br><div class="kommentare">
+                    <span id="srt"><h1>Kommentare</h1><p>˄</p><p>˅</p></span>
+                    <input placeholder="kommentar">
+                    <input placeholder="name">
+                    <button >send</button>
+                     </div>
+                  </div>
+                  `;*/
+        }
+        function pushNewCardInArray() {
+          let name = document.getElementById('name').value;
+          let alter = document.getElementById('alter').value;
+          let rasse = document.getElementById('rasse').value;
+          const card = {
+            Name: name,
+            Alter: alter,
+            Rasse: rasse,
+            Kommentare: []
+          }
+
+          cats.push(card);
+          save();
+          render();
+        }
+        function save() {
+          let arrayToText = JSON.stringify(cats);
+          localStorage.setItem('cats', arrayToText)
+        }
+        function load() {
+          let arrayToText = localStorage.getItem('cats');
+          const tmp =
+          {
+            Name: ['Nala', 'Schleife'],
+            Alter: 2,
+            Rasse: 'Heilige Birma',
+            Kommentare: [{
+              User: 'Nala',
+              Datum: 'Heute',
+              Zeit: 'Jetzt',
+              Kommentar: ['🐝']
+            },
+            {
+              User: 'Susi',
+              Datum: '05.07.2023',
+              Zeit: '10:16:14',
+              Kommentar: ['😻😽']
+            },
+            {
+              User: 'Luni',
+              Datum: '02.07.2023',
+              Zeit: '14:23:04',
+              Kommentar: ['🐭🐱😺']
+            }
+            ]
+          }
+          if (arrayToText) {
+            cats = JSON.parse(arrayToText);
+          }
+          if (!arrayToText) {
+            cats.push(tmp);
+            save();
+          }
+        }
+        function deleteCard(i) {
+
+          cats.splice(i, 1);
+
+          if (cats == '') {
+            localStorage.clear();
+            load();
+          }
+
+          save();
+          render();
+
+        }
+        function editCard(i) {
+          let name = document.getElementById(`name${i}`).innerHTML;
+          let alter = document.getElementById(`alter${i}`).innerText;
+          let rasse = document.getElementById(`rasse${i}`).innerText;
+
+          cats[i]['Name'] = name;
+          cats[i]['Alter'] = alter;
+          cats[i]['Rasse'] = rasse;
+
+          save();
+          render();
+        }
+        function sortByName(cat1, cat2) {
+          return cat1.Name.localeCompare(cat2.Name);
+        }
+        function sortByAlter(cat1, cat2) {
+          if (cat1.Alter < cat2.Alter) {
+            return -1;
+          }
+          if (cat1.Alter > cat2.Alter) {
+            return 1;
+          }
+          return 0;
+        }
+        function sortByKommentare(cat1, cat2) {
+          if (cat1.Kommentare.length < cat2.Kommentare.length) {
+            return -1;
+          }
+          if (cat1.Kommentare.length > cat2.Kommentare.length) {
+            return 1;
+          }
+          return 0;
+        }
+        function sortByRasse(cat1, cat2) {
+          return cat1.Rasse.localeCompare(cat2.Rasse)
+        }
+        function sortByDate(kom1, kom2) {
+          if (kom1.Zeit < kom2.Zeit) {
+            return -1;
+          }
+          if (kom1.Zeit > kom2.Zeit) {
+            return 1;
+          }
+          return 0;
+        }
+
+      </script>
+  </section>
+</body>
+
+</html>
